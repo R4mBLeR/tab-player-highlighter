@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "net.r4mble.mixin.client",
+	"package": "net.r4mble.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+		"PlayerListHudMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

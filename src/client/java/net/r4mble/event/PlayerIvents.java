@@ -4,10 +4,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.network.ServerInfo;
-import net.r4mble.TabPlayerHighlighter;
+import net.r4mble.TabPlayerHighlighterClient;
 import net.r4mble.util.TabPlayerHighlighterAPI;
 
-import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class PlayerIvents {
@@ -20,18 +19,10 @@ public class PlayerIvents {
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             client.execute(() -> {
                 ServerInfo serverInfo = client.getCurrentServerEntry();
-                Map<String, String[]> players;
                 if (serverInfo != null) {
-                    TabPlayerHighlighter.LOGGER.info(String.valueOf(serverInfo.players.online()));
-                    players = TabPlayerHighlighterAPI.getPlayersWithRoles();
-                } else {
-                    players = TabPlayerHighlighterAPI.getPlayersWithRoles();
-                }
-                if (players != null) {
-                    TabPlayerHighlighter.LOGGER.info(players.toString());
+                    TabPlayerHighlighterClient.players_prefixes = TabPlayerHighlighterAPI.getPlayersWithRoles();
                 }
             });
         });
     }
-
 }
