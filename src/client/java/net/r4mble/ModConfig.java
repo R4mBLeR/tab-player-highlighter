@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class ModConfig {
     public boolean onlineMod = true;
-    public String API_URL = "http://localhost:3000/api/get_roles";
+    public String API_URL = "http://localhost:3000/get_roles";
     public HashMap<String, String> playersPrefixes = new HashMap<>();
 
     public static ModConfig load() {

@@ -22,7 +22,6 @@ public abstract class PlayerListHudMixin {
 			return;
 		}
 		String uuid = entry.getProfile().getId().toString();
-		uuid = uuid.replaceAll("-","");
 
 		String prefix = TabPlayerHighlighterClient.players_prefixes.get(uuid);
 		if (prefix != null && !prefix.isEmpty()) {
