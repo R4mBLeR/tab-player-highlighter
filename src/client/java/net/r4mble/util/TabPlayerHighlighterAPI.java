@@ -3,6 +3,7 @@ package net.r4mble.util;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.r4mble.TabPlayerHighlighter;
 import net.r4mble.TabPlayerHighlighterClient;
 
 import java.net.URI;
