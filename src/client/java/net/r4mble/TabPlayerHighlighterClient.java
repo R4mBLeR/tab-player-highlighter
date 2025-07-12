@@ -7,11 +7,10 @@ import java.util.Map;
 
 public class TabPlayerHighlighterClient implements ClientModInitializer {
     public static Map<String, String> players_prefixes;
-    public static ModConfig CONFIG;
 
     @Override
     public void onInitializeClient() {
-        CONFIG = ModConfig.load();
+        ModConfig.HANDLER.load();
         PlayerIvents.registerEvents();
     }
 }

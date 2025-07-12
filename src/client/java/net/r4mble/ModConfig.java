@@ -1,32 +1,29 @@
 package net.r4mble;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Identifier;
+
 import java.io.*;
-import java.nio.file.Files;
 import java.util.HashMap;
 
 public class ModConfig {
+    public static ConfigClassHandler<ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
+            .id(Identifier.of("tab_player_highlighter", "config"))
+                    .serializer(config -> GsonConfigSerializerBuilder.create(config)
+                            .setPath(FabricLoader.getInstance().getConfigDir().resolve("tab_player_highlighter.json"))
+                            .build())
+                    .build();
+
+    @SerialEntry
+    public boolean priorityMode = true;
+    @SerialEntry
     public boolean onlineMod = true;
+    @SerialEntry
     public String API_URL = "http://localhost:3000/get_roles";
+    @SerialEntry
     public HashMap<String, String> playersPrefixes = new HashMap<>();
 
-    public static ModConfig load() {
-        File configFile = new File("./config/tab_player_highlighter.json");
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        try {
-            if (!configFile.exists()) {
-                ModConfig defaultConfig = new ModConfig();
-                String json = gson.toJson(defaultConfig);
-                Files.createDirectories(configFile.getParentFile().toPath());
-                Files.write(configFile.toPath(), json.getBytes());
-                return defaultConfig;
-            } else {
-                return gson.fromJson(new FileReader(configFile), ModConfig.class);
-            }
-        } catch (IOException e) {
-            return new ModConfig(); // Возвращаем дефолтные значения
-        }
-    }
 }

@@ -3,8 +3,7 @@ package net.r4mble.util;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.r4mble.TabPlayerHighlighter;
-import net.r4mble.TabPlayerHighlighterClient;
+import net.r4mble.ModConfig;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -20,10 +19,10 @@ public class TabPlayerHighlighterAPI {
             .build();
 
     public static Map<String, String> getPlayersWithRoles() {
-        if (TabPlayerHighlighterClient.CONFIG.onlineMod) {
+        if (ModConfig.HANDLER.instance().onlineMod) {
             try {
                 HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(TabPlayerHighlighterClient.CONFIG.API_URL))
+                        .uri(URI.create(ModConfig.HANDLER.instance().API_URL))
                         .build();
                 HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
                 JsonObject playersArray = JsonParser.parseString(response.body()).getAsJsonObject().get("players").getAsJsonObject();
@@ -34,7 +33,7 @@ public class TabPlayerHighlighterAPI {
                 return null;
             }
         } else {
-            return TabPlayerHighlighterClient.CONFIG.playersPrefixes;
+            return ModConfig.HANDLER.instance().playersPrefixes;
         }
     }
 }
