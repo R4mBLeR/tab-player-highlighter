@@ -3,9 +3,12 @@
   "package": "net.r4mble.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "PlayerListHudMixin"
+    "VanillaPlayerListHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "BetterTabMixin"
+  ]
 }
