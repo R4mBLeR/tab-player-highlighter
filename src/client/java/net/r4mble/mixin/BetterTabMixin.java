@@ -5,7 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.text.Text;
 import net.r4mble.ModConfig;
-import net.r4mble.TabPlayerHighlighterClient;
+import net.r4mble.TabPlayerHighlighter;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,7 @@ public class BetterTabMixin {
     @Inject(method = "getPlayerEntries", at = @At("RETURN"), cancellable = true)
     private static void afterThem(MinecraftClient client, boolean ENABLE_MOD, boolean USE_EXAMPLES, int EXAMPLE_AMOUNT, String EXAMPLE_TEXT, Comparator<PlayerListEntry> ENTRY_ORDERING, CallbackInfoReturnable<List<PlayerListEntry>> cir) {
         List<PlayerListEntry> originalList = cir.getReturnValue();
-        if (!ModConfig.HANDLER.instance().priorityMode || TabPlayerHighlighterClient.players_prefixes == null) {
+        if (!ModConfig.HANDLER.instance().priorityMode || TabPlayerHighlighter.players_prefixes == null) {
             cir.setReturnValue(originalList);
             cir.cancel();
             return;
@@ -32,13 +32,13 @@ public class BetterTabMixin {
         }
         List<PlayerListEntry> modifiedList = new ArrayList<>();
         List<PlayerListEntry> priorityList = new ArrayList<>();
-        for (Map.Entry<String, String> entry : TabPlayerHighlighterClient.players_prefixes.entrySet()) {
+        for (Map.Entry<String, String> entry : TabPlayerHighlighter.players_prefixes.entrySet()) {
             if (tabList.containsKey(entry.getKey())) {
                 priorityList.add(tabList.get(entry.getKey()));
             }
         }
         for (PlayerListEntry entry : originalList) {
-            if (!TabPlayerHighlighterClient.players_prefixes.containsKey(entry.getProfile().getId().toString())) {
+            if (!TabPlayerHighlighter.players_prefixes.containsKey(entry.getProfile().getId().toString())) {
                 modifiedList.add(entry);
             }
         }
@@ -53,12 +53,12 @@ public class BetterTabMixin {
                 ? entry.getDisplayName()
                 : Text.literal(entry.getProfile().getName());
 
-        if (TabPlayerHighlighterClient.players_prefixes == null) {
+        if (TabPlayerHighlighter.players_prefixes == null) {
             return;
         }
         String uuid = entry.getProfile().getId().toString();
 
-        String prefix = TabPlayerHighlighterClient.players_prefixes.get(uuid);
+        String prefix = TabPlayerHighlighter.players_prefixes.get(uuid);
         if (prefix != null && !prefix.isEmpty()) {
             Text modifiedName = Text.empty()
                     .append(Text.literal(prefix))

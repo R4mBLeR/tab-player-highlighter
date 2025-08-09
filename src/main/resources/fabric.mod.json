@@ -15,18 +15,14 @@
   "icon": "assets/tab_player_highlighter/icon.png",
   "environment": "client",
   "entrypoints": {
-    "main": [
-      "net.r4mble.TabPlayerHighlighter"
-    ],
     "client": [
-      "net.r4mble.TabPlayerHighlighterClient"
+      "net.r4mble.TabPlayerHighlighter"
     ],
     "modmenu": [
       "net.r4mble.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "tab_player_highlighter.mixins.json",
     {
       "config": "tab_player_highlighter.client.mixins.json",
       "environment": "client"

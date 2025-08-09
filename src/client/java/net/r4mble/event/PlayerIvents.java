@@ -4,7 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.network.ServerInfo;
-import net.r4mble.TabPlayerHighlighterClient;
+import net.r4mble.TabPlayerHighlighter;
 import net.r4mble.util.TabPlayerHighlighterAPI;
 
 
@@ -20,7 +20,7 @@ public class PlayerIvents {
             client.execute(() -> {
                 ServerInfo serverInfo = client.getCurrentServerEntry();
                 if (serverInfo != null) {
-                    TabPlayerHighlighterClient.players_prefixes = TabPlayerHighlighterAPI.getPlayersWithRoles();
+                    TabPlayerHighlighter.players_prefixes = TabPlayerHighlighterAPI.getPlayersWithRoles();
                 }
             });
         });

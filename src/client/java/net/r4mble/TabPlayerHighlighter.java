@@ -2,15 +2,21 @@ package net.r4mble;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.r4mble.event.PlayerIvents;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-public class TabPlayerHighlighterClient implements ClientModInitializer {
+public class TabPlayerHighlighter implements ClientModInitializer {
+    public static final String MOD_ID = "tab_player_highlighter";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
     public static Map<String, String> players_prefixes;
 
     @Override
     public void onInitializeClient() {
         ModConfig.HANDLER.load();
         PlayerIvents.registerEvents();
+        LOGGER.info("Mod is initialized!");
     }
 }
